@@ -1,32 +1,42 @@
 # 🎟️ Simulador de Reservas Concurrentes con PostgreSQL
 
-Este proyecto simula múltiples usuarios intentando reservar el **mismo asiento** al mismo tiempo en una base de datos PostgreSQL, evaluando la integridad de los datos bajo diferentes niveles de aislamiento.
+Este proyecto simula múltiples usuarios intentando reservar el mismo asiento al mismo tiempo en una base de datos PostgreSQL. Evalúa cómo diferentes niveles de aislamiento (`READ COMMITTED`, `REPEATABLE READ`, `SERIALIZABLE`) afectan la integridad de los datos durante operaciones concurrentes usando transacciones.
 
 ---
 
-## 🚀 ¿Qué hace este simulador?
+## 📁 ¿Qué hay dentro del proyecto?
 
-- Conecta a una base de datos PostgreSQL.
-- Verifica si la base ya existe; si no, la crea automáticamente.
-- Carga las tablas y datos necesarios.
-- Simula concurrencia con múltiples hilos (usuarios).
-- Controla transacciones y bloqueos para evitar inconsistencias.
-- Muestra resultados **en consola** como un listado profesional.
-
----
-
-## 🧩 Requisitos
-
-- Python 3.8 o superior
-- PostgreSQL instalado y corriendo
-- Acceso a una cuenta con permisos para crear bases y ejecutar scripts
+```
+simulador_reservas/
+├── simulador_reservas.py        # Script principal que corre la simulación
+├── db_initializer.py            # Crea la base y ejecuta los scripts SQL si no existen
+├── init_db.sql                  # Crea las tablas, funciones y triggers
+├── data.sql                     # Inserta usuarios, eventos, asientos y reservas iniciales
+├── config.ini                   # Configuración editable de base de datos y simulación
+├── requirements.txt             # Dependencias (psycopg2-binary)
+└── README.md                    # Instrucciones del proyecto
+```
 
 ---
 
-## 📦 Instalación
+## 🚀 ¿Cómo se corre el simulador?
 
-1. Clona este repositorio o descarga los archivos.
-2. Instala las dependencias con:
+1. Asegúrate de tener PostgreSQL 17 corriendo y accesible.
+2. Configura `config.ini` con tu usuario de postgres y una contraseña válida.
+3. Instala las dependencias:
 
 ```bash
 pip install -r requirements.txt
+```
+
+4. Ejecuta el simulador:
+
+```bash
+python3 simulador_reservas.py
+```
+
+El sistema se encargará de:
+- Verificar si la base existe (y crearla si no).
+- Crear las tablas y cargar los datos si es necesario.
+- Ejecutar la simulación concurrente de reservas.
+- Mostrar los resultados directamente en consola.
