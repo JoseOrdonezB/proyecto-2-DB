@@ -32,7 +32,7 @@ pip install -r requirements.txt
 4. Ejecuta el simulador:
 
 ```bash
-python3 simulador_reservas.py
+python3 reservas-simulacion.py
 ```
 
 El sistema se encargará de:
